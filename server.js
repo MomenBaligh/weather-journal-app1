@@ -27,6 +27,21 @@ const port = 8000;
 app.listen(port, () => console.log(`running on localhost:${port}`));
 
 // get route
-app.get('/projectData', (req, res, next) => {
+app.get('/projectData', (req, res) => {
   res.status(200).send(projectData);
+});
+
+//post route
+app.post('/projectData', (req, res) => {
+  projectData = {
+    time: req.body.time,
+    date: req.body.date,
+    temp: req.body.temperature,
+    feelings: req.body.feelings,
+  };
+  res.status(200).send({
+    sucess: true,
+    message: 'Your data have been stored',
+    data: projectData,
+  });
 });
